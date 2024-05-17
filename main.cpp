@@ -1,25 +1,26 @@
 #include "graphics.hpp"
-#include "button.hpp"
+#include "tic_tac_toe.hpp"
+#include "jatekmester.hpp"
 
 using namespace genv;
 
-const int XX = 800;
-const int YY = 800;
-
 int main() {
-    gout.open(XX, YY);
+    gout.open(TicTacToe::XX, TicTacToe::YY);
     gin.timer(40);
 
-    Button button(100, 100, 40);
+    TicTacToe game;
+    JatekMester jatekMester;
 
     event ev;
     while (gin >> ev && ev.keycode != key_escape) {
         if (ev.type == ev_timer) {
-            gout << color(0, 0, 0) << move_to(0, 0) << box(XX, YY);
-            button.draw();
+            gout << color(0, 0, 0) << move_to(0, 0) << box(TicTacToe::XX, TicTacToe::YY);
+            game.draw();
+            jatekMester.drawGameOverMessage();
             gout << refresh;
         }
-        button.handleEvent(ev);
+        jatekMester.handleEvent(ev, game);
+        game.handleEvent(ev, jatekMester);
     }
 
     return 0;

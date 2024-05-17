@@ -1,25 +1,24 @@
-#ifndef BUTTON_HPP
-#define BUTTON_HPP
+#ifndef UJJATEK_HPP
+#define UJJATEK_HPP
 
 #include "graphics.hpp"
 
 using namespace genv;
 
-class Button {
+class UjJatek {
 private:
-    int x, y, size;
+    int x, y, width, height;
+    bool visible;
     bool clicked;
-    char texts;
 
 public:
-    Button(int x, int y, int size);
+    UjJatek(int x, int y, int width, int height);
 
     void draw() const;
     void handleEvent(const event& ev);
+    void setVisible(bool v);
     bool isClicked() const;
     void reset();
-    void setText(char t);
-    char getText() const;
 };
 
-#endif // BUTTON_HPP
+#endif // UJJATEK_HPP
